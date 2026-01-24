@@ -448,7 +448,11 @@ export default function RoosoLanding() {
             <div className="grid grid-cols-2 gap-4">
               {services[activeService].images.map((image, index) => (
                 <div key={index} className="relative group">
-                 
+                  <img
+                    src={image.src}
+                    alt={image.title}
+                    className="w-full h-48 object-cover rounded-lg"
+                  />
                   <div className="absolute bottom-0 left-0 right-0 progressive-blur text-white p-3 rounded-b-lg">
                     <h3 className="font-bold text-[#124409]">{image.title}</h3>
                     <p className="text-sm">{image.subtitle}</p>
@@ -499,7 +503,7 @@ export default function RoosoLanding() {
               <span className="font-bold text-xl">About Us</span>
               <span>At ROOSO INC., we specialize in high-quality roofing and general contracting services for residential and commercial clients. With years of experience, our team is committed to delivering reliable, professional, and long-lasting solutions—on time and on budget.
 
-We take pride in our craftsmanship, clear communication, and customer-first approach. Whether you need a roof replacement, home renovation, or full-scale construction project, were here to get the job done right.
+We take pride in our craftsmanship, clear communication, and customer-first approach. Whether you need a roof replacement, home renovation, or full-scale construction project, we re here to get the job done right.
 </span>
             </div>
             <div className='flex flex-col gap-3'>
@@ -530,7 +534,11 @@ To be the leading provider of roofing and general contracting services, known fo
               "photo-1541976590-713941681591",
             ].map((id, index) => (
               <div className="min-w-[300px] h-48" key={index}>
-               
+                <img
+                  src={`https://images.unsplash.com/${id}?w=300&h=200&fit=crop`}
+                  alt={`Slide ${index + 1}`}
+                  className="w-full h-full object-cover rounded-lg"
+                />
               </div>
             ))}
 
@@ -543,7 +551,11 @@ To be the leading provider of roofing and general contracting services, known fo
               "photo-1541976590-713941681591",
             ].map((id, index) => (
               <div className="min-w-[300px] h-48" key={`clone-${index}`}>
-               
+                <img
+                  src={`https://images.unsplash.com/${id}?w=300&h=200&fit=crop`}
+                  alt={`Slide clone ${index + 1}`}
+                  className="w-full h-full object-cover rounded-lg"
+                />
               </div>
             ))}
           </div>
@@ -568,7 +580,11 @@ To be the leading provider of roofing and general contracting services, known fo
             {/* Testimonial 1 */}
             <div className="bg-black bg-opacity-70 p-6 rounded-lg">
               <div className="flex items-center mb-4">
-               
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face"
+                  alt="Client"
+                  className="w-16 h-16 rounded-full mr-4"
+                />
                 <div className="text-left">
                   <div className="text-sm text-gray-300">Tampa, FL</div>
                 </div>
@@ -586,7 +602,11 @@ To be the leading provider of roofing and general contracting services, known fo
             {/* Testimonial 2 */}
             <div className="bg-black bg-opacity-70 p-6 rounded-lg">
               <div className="flex items-center mb-4">
-         
+                <img
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face"
+                  alt="Client"
+                  className="w-16 h-16 rounded-full mr-4"
+                />
                 <div className="text-left">
                   <div className="text-sm text-gray-300">Orlando, FL</div>
                 </div>
@@ -604,7 +624,11 @@ To be the leading provider of roofing and general contracting services, known fo
             {/* Testimonial 3 */}
             <div className="bg-black bg-opacity-70 p-6 rounded-lg">
               <div className="flex items-center mb-4">
-                
+                <img
+                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face"
+                  alt="Client"
+                  className="w-16 h-16 rounded-full mr-4"
+                />
                 <div className="text-left">
                   <div className="text-sm text-gray-300">Miami, FL</div>
                 </div>
