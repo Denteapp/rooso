@@ -2,7 +2,7 @@
 const nextConfig = {
     output: 'standalone',
     images: {
-    domains: ["app.gethearth.com" ]
+    domains: ["app.gethearth.com", "images.unsplash.com"]
     }
 };
 
