@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
+import { FaHome, FaDollarSign, FaShieldAlt, FaUsers, FaFileContract, FaHandshake, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 // import { useState } from 'react'
 export default function RoosoLanding() {
   const [activeService, setActiveService] = useState('roofing');
@@ -411,6 +412,166 @@ export default function RoosoLanding() {
         </div>
       </section>
 
+      {/* Features/Services Icon Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Feature 1 - Commercial Roofing */}
+            <div className="flex flex-col items-center text-center group hover:transform hover:scale-105 transition-all duration-300">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#05240a] to-[#2DAA17] rounded-lg flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:shadow-green-500/50 transition-all">
+                <FaHome className="text-white text-3xl" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Commercial Roofing</h3>
+              <p className="text-sm text-gray-600 max-w-xs">
+                Professional commercial roofing services for businesses and industrial facilities with
+                top-quality materials and expert installation.
+              </p>
+            </div>
+
+            {/* Feature 2 - Quality Work at Reasonable Price */}
+            <div className="flex flex-col items-center text-center group hover:transform hover:scale-105 transition-all duration-300">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#05240a] to-[#2DAA17] rounded-lg flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:shadow-green-500/50 transition-all">
+                <FaDollarSign className="text-white text-3xl" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Quality Work, Reasonable Price</h3>
+              <p className="text-sm text-gray-600 max-w-xs">
+                We provide exceptional craftsmanship at competitive prices, ensuring value and
+                quality on every project without compromising standards.
+              </p>
+            </div>
+
+            {/* Feature 3 - Safe & Reliable */}
+            <div className="flex flex-col items-center text-center group hover:transform hover:scale-105 transition-all duration-300">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#05240a] to-[#2DAA17] rounded-lg flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:shadow-green-500/50 transition-all">
+                <FaShieldAlt className="text-white text-3xl" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Safe & Reliable</h3>
+              <p className="text-sm text-gray-600 max-w-xs">
+                Our team prioritizes safety and reliability on every job site, following strict
+                safety protocols and delivering dependable results.
+              </p>
+            </div>
+
+            {/* Feature 4 - Expert Crews */}
+            <div className="flex flex-col items-center text-center group hover:transform hover:scale-105 transition-all duration-300">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#05240a] to-[#2DAA17] rounded-lg flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:shadow-green-500/50 transition-all">
+                <FaUsers className="text-white text-3xl" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Expert Crews</h3>
+              <p className="text-sm text-gray-600 max-w-xs">
+                Our experienced and highly skilled crews bring years of expertise to every project,
+                ensuring professional results and customer satisfaction.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Licensing & Veterans Banner */}
+      <section className="py-8 bg-gradient-to-r from-[#2DAA17] via-[#05240a] to-[#2DAA17]">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            {/* Left Side - License Info */}
+            <div className="flex items-center justify-center gap-6 text-white">
+              <div className="flex items-center gap-3">
+                <FaFileContract className="text-5xl" />
+                <div>
+                  <p className="text-sm font-light">Lic: CGC059479 & CCC133126</p>
+                  <p className="text-xs opacity-80 mt-1">Poner esto en Lic: CGC1537832 - CCC1336190</p>
+                  <p className="text-xs opacity-70 mt-1">Referencia https://www.5star-gc.com/</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side - Veterans Discount */}
+            <div className="flex items-center justify-center gap-4 text-white">
+              <FaHandshake className="text-5xl" />
+              <div>
+                <p className="text-xl font-bold">Veterans Discounts Available</p>
+                <p className="text-sm opacity-80">Thank you for your service</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Gallery Section */}
+      <section className="bg-gray-100">
+        {/* Projects Header with Background Image */}
+        <div className="relative h-64 flex items-center justify-center">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <Image
+              src="/img/roof1.jpg"
+              alt="Projects Background"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/50"></div>
+          </div>
+          
+          {/* Content */}
+          <div className="relative z-10 text-center text-white">
+            <div className="flex items-center justify-center gap-2 text-sm mb-4">
+              <span>Home</span>
+              <span>•</span>
+              <span className="font-semibold">Projects</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold">Projects</h2>
+          </div>
+        </div>
+
+        {/* Projects Grid Container */}
+        <div className="max-w-7xl mx-auto px-4 py-16">
+
+          {/* Project Images Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            {/* Row 1 - House Exteriors */}
+            {[1, 2, 3, 4].map((num) => (
+              <div key={`house-${num}`} className="relative aspect-square overflow-hidden rounded-lg group cursor-pointer">
+                <Image
+                  src={`/img/roof${num}.jpg`}
+                  alt={`Project ${num}`}
+                  width={400}
+                  height={400}
+                  className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#05240a]/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-4 left-4 text-white">
+                    <p className="font-semibold">Project {num}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+            
+            {/* Row 2 - Detail Shots */}
+            {[1, 2, 3, 4].map((num) => (
+              <div key={`detail-${num}`} className="relative aspect-square overflow-hidden rounded-lg group cursor-pointer">
+                <Image
+                  src={`/img/gen${num}.jpg`}
+                  alt={`Detail ${num}`}
+                  width={400}
+                  height={400}
+                  className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#05240a]/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-4 left-4 text-white">
+                    <p className="font-semibold">Detail Work</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* View All Button */}
+          <div className="text-center">
+            <button className="bg-gradient-to-r from-[#05240a] via-[#2DAA17] to-[#05240a] text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-green-500/50 transition-all duration-300">
+              View All Projects
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Services Section */}
       <section className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4">
@@ -444,21 +605,17 @@ export default function RoosoLanding() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Images Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              {services[activeService].images.map((image, index) => (
-                <div key={index} className="relative group">
-                  <img
-                    src={image.src}
-                    alt={image.title}
-                    className="w-full h-48 object-cover rounded-lg"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 progressive-blur text-white p-3 rounded-b-lg">
-                    <h3 className="font-bold text-[#124409]">{image.title}</h3>
-                    <p className="text-sm">{image.subtitle}</p>
-                  </div>
-                </div>
-              ))}
+            {/* Single Image */}
+            <div className="relative group">
+              <img
+                src={services[activeService].images[0].src}
+                alt={services[activeService].images[0].title}
+                className="w-full h-96 object-cover rounded-lg"
+              />
+              <div className="absolute bottom-0 left-0 right-0 progressive-blur text-white p-4 rounded-b-lg">
+                <h3 className="font-bold text-[#124409] text-xl">{services[activeService].images[0].title}</h3>
+                <p className="text-sm">{services[activeService].images[0].subtitle}</p>
+              </div>
             </div>
 
             {/* Service Info */}
@@ -503,7 +660,7 @@ export default function RoosoLanding() {
               <span className="font-bold text-xl">About Us</span>
               <span>At ROOSO INC., we specialize in high-quality roofing and general contracting services for residential and commercial clients. With years of experience, our team is committed to delivering reliable, professional, and long-lasting solutions—on time and on budget.
 
-We take pride in our craftsmanship, clear communication, and customer-first approach. Whether you need a roof replacement, home renovation, or full-scale construction project, we re here to get the job done right.
+{/* We take pride in our craftsmanship, clear communication, and customer-first approach. Whether you need a roof replacement, home renovation, or full-scale construction project, we re here to get the job done right. */}
 </span>
             </div>
             <div className='flex flex-col gap-3'>
@@ -562,85 +719,132 @@ To be the leading provider of roofing and general contracting services, known fo
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-16 bg-gray-900 text-white relative">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&h=600&fit=crop)'
-          }}
-        ></div>
-
-        <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-12">
-            HOW TELL ORS CLIENTS ABOUT US?
+      {/* Reviews Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Section Header */}
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-12">
+            Reviews
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Testimonial 1 */}
-            <div className="bg-black bg-opacity-70 p-6 rounded-lg">
-              <div className="flex items-center mb-4">
-                <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face"
-                  alt="Client"
-                  className="w-16 h-16 rounded-full mr-4"
-                />
-                <div className="text-left">
-                  <div className="text-sm text-gray-300">Tampa, FL</div>
+          {/* Reviews Container with Navigation */}
+          <div className="relative">
+            {/* Left Arrow */}
+            <button className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-all z-10">
+              <FaChevronLeft className="text-gray-600" />
+            </button>
+
+            {/* Reviews Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Review 1 - Pam Greco */}
+              <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-[#05240a] to-[#2DAA17] rounded-full flex items-center justify-center text-white font-bold text-xl mr-3">
+                    P
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-800">Pam Greco</h3>
+                    <div className="flex text-yellow-400 text-sm">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i}>★</span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
+                <p className="text-gray-600 text-sm mb-4">
+                  Rafael builds very excellent, it interplay off line day front starts to finish, flip capability everything ever was going to one price when all was going to happen, very profissiona...
+                </p>
+                <a href="#" className="text-[#2DAA17] text-sm font-semibold hover:underline">
+                  Read more
+                </a>
               </div>
-              <p className="text-sm mb-4 italic">
-                Luis es el mejor, me arreglo el techo en julio y recomiendo para el próximo año
-              </p>
-              <div className="flex justify-center">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400 text-xl">★</span>
-                ))}
+
+              {/* Review 2 - Aqar Dina */}
+              <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-[#05240a] to-[#2DAA17] rounded-full flex items-center justify-center text-white font-bold text-xl mr-3">
+                    A
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-800">Aqar Dina</h3>
+                    <div className="flex text-yellow-400 text-sm">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i}>★</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <p className="text-gray-600 text-sm mb-4">
+                  I experienced them to my neighbor and I couldn't be happy with the work. Rafael is just person Call 5-level Roofing it's success. I-org thank men i-be happy wit...
+                </p>
+                <a href="#" className="text-[#2DAA17] text-sm font-semibold hover:underline">
+                  Read more
+                </a>
+              </div>
+
+              {/* Review 3 - Emiliano Yaneth Guadin */}
+              <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-[#05240a] to-[#2DAA17] rounded-full flex items-center justify-center text-white font-bold text-xl mr-3">
+                    E
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-800">Emiliano Yaneth Guadin</h3>
+                    <div className="flex text-yellow-400 text-sm">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i}>★</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <p className="text-gray-600 text-sm mb-4">
+                  I am very pleased with this company and their work. Better was very responsive and professional throughout to entire process. I recommend 10/10! Thank you it...
+                </p>
+                <a href="#" className="text-[#2DAA17] text-sm font-semibold hover:underline">
+                  Read more
+                </a>
               </div>
             </div>
 
-            {/* Testimonial 2 */}
-            <div className="bg-black bg-opacity-70 p-6 rounded-lg">
-              <div className="flex items-center mb-4">
-                <img
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face"
-                  alt="Client"
-                  className="w-16 h-16 rounded-full mr-4"
-                />
-                <div className="text-left">
-                  <div className="text-sm text-gray-300">Orlando, FL</div>
-                </div>
-              </div>
-              <p className="text-sm mb-4 italic">
-                Luis es el mejor, me arreglo el techo en julio y recomiendo para el próximo año
-              </p>
-              <div className="flex justify-center">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400 text-xl">★</span>
-                ))}
+            {/* Right Arrow */}
+            <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-all z-10">
+              <FaChevronRight className="text-gray-600" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Reference Section - Footer */}
+      <section className="py-12 bg-[#2d2d2b]">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            {/* Left Side - Company Info */}
+            <div className="flex items-center gap-6">
+              <Image
+                src="/logo2.png"
+                alt="Rooso Construction"
+                width={120}
+                height={80}
+                className="w-32 h-auto"
+              />
+              <div className="text-white">
+                <h3 className="text-xl font-bold mb-2">ROOSO INC.</h3>
+                <p className="text-sm text-gray-300 mb-1">📞 844-781-9216</p>
+                <p className="text-sm text-gray-300 mb-1">📧 info@coastalridgeroofingfl.com</p>
+                <p className="text-sm text-gray-300">Lic #26514782</p>
+                
               </div>
             </div>
 
-            {/* Testimonial 3 */}
-            <div className="bg-black bg-opacity-70 p-6 rounded-lg">
-              <div className="flex items-center mb-4">
-                <img
-                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face"
-                  alt="Client"
-                  className="w-16 h-16 rounded-full mr-4"
-                />
-                <div className="text-left">
-                  <div className="text-sm text-gray-300">Miami, FL</div>
-                </div>
-              </div>
-              <p className="text-sm mb-4 italic">
-                Luis es el mejor, me arreglo el techo en julio y recomiendo para el próximo año
-              </p>
-              <div className="flex justify-center">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400 text-xl">★</span>
-                ))}
-              </div>
+            {/* Right Side - CTA */}
+            <div className="text-center md:text-right">
+              <button 
+                onClick={() => setIsOpen(true)}
+                className="bg-gradient-to-r from-[#2DAA17] to-[#32c849] text-white px-10 py-4 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-green-500/50 transition-all duration-300 inline-block"
+              >
+                Get a Quote
+              </button>
+              <p className="text-gray-400 text-sm mt-3">Privacy Policy</p>
             </div>
           </div>
         </div>
