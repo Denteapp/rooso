@@ -607,9 +607,11 @@ export default function RoosoLanding() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Single Image */}
             <div className="relative group">
-              <img
+              <Image
                 src={services[activeService].images[0].src}
                 alt={services[activeService].images[0].title}
+                width={600}
+                height={400}
                 className="w-full h-96 object-cover rounded-lg"
               />
               <div className="absolute bottom-0 left-0 right-0 progressive-blur text-white p-4 rounded-b-lg">
@@ -691,9 +693,11 @@ To be the leading provider of roofing and general contracting services, known fo
               "photo-1541976590-713941681591",
             ].map((id, index) => (
               <div className="min-w-[300px] h-48" key={index}>
-                <img
+                <Image
                   src={`https://images.unsplash.com/${id}?w=300&h=200&fit=crop`}
                   alt={`Slide ${index + 1}`}
+                  width={300}
+                  height={200}
                   className="w-full h-full object-cover rounded-lg"
                 />
               </div>
@@ -708,9 +712,11 @@ To be the leading provider of roofing and general contracting services, known fo
               "photo-1541976590-713941681591",
             ].map((id, index) => (
               <div className="min-w-[300px] h-48" key={`clone-${index}`}>
-                <img
+                <Image
                   src={`https://images.unsplash.com/${id}?w=300&h=200&fit=crop`}
                   alt={`Slide clone ${index + 1}`}
+                  width={300}
+                  height={200}
                   className="w-full h-full object-cover rounded-lg"
                 />
               </div>
@@ -775,7 +781,7 @@ To be the leading provider of roofing and general contracting services, known fo
                   </div>
                 </div>
                 <p className="text-gray-600 text-sm mb-4">
-                  I experienced them to my neighbor and I couldn't be happy with the work. Rafael is just person Call 5-level Roofing it's success. I-org thank men i-be happy wit...
+                  I experienced them to my neighbor and I couldn&apos;t be happy with the work. Rafael is just person Call 5-level Roofing it&apos;s success. I-org thank men i-be happy wit...
                 </p>
                 <a href="#" className="text-[#2DAA17] text-sm font-semibold hover:underline">
                   Read more
