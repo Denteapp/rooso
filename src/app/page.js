@@ -902,9 +902,11 @@ To be the leading provider of roofing and general contracting services, known fo
                 />
                 <div className="text-white">
                   <h3 className="text-xl font-bold mb-2">ROOSO INC.</h3>
-                  <p className="text-sm text-gray-300 mb-1">📞 813-369-9900</p>
-                  <p className="text-sm text-gray-300 mb-1">📧 info@coastalridgeroofingfl.com</p>
-                  <p className="text-sm text-gray-300">Lic #26514782</p>
+                  <p>📞 <a href="tel:8133699900" className="hover:text-[#1e8b2f] transition-colors">813-369-9900</a></p>
+            <p>📞 <a href="tel:8137340290" className="hover:text-[#1e8b2f] transition-colors">813-734-0290</a></p>
+            <p>📞 <a href="tel:8139707315" className="hover:text-[#1e8b2f] transition-colors">813-970-7315</a></p>
+            <p>📧 <a href="mailto:info@roosogroup.com" className="hover:text-[#1e8b2f] transition-colors">info@roosogroup.com</a></p>
+            <p>Lic: CGC059479 & CCC133126</p>
                   
                 </div>
             </div>
