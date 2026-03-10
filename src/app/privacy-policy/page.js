@@ -129,9 +129,11 @@ export default function PrivacyPolicy() {
           </p>
           <div className="bg-[#f0faf2] border border-green-200 rounded-xl p-6 space-y-1">
             <p className="font-bold text-[#124409] text-lg">ROOSO INC.</p>
-            <p>📞 <a href="tel:8447819216" className="hover:text-[#1e8b2f] transition-colors">844-781-9216</a></p>
-            <p>📧 <a href="mailto:info@coastalridgeroofingfl.com" className="hover:text-[#1e8b2f] transition-colors">info@coastalridgeroofingfl.com</a></p>
-            <p>Lic #26514782</p>
+            <p>📞 <a href="tel:8133699900" className="hover:text-[#1e8b2f] transition-colors">813-369-9900</a></p>
+            <p>📞 <a href="tel:8137340290" className="hover:text-[#1e8b2f] transition-colors">813-734-0290</a></p>
+            <p>📞 <a href="tel:8139707315" className="hover:text-[#1e8b2f] transition-colors">813-970-7315</a></p>
+            <p>📧 <a href="mailto:info@roosogroup.com" className="hover:text-[#1e8b2f] transition-colors">info@roosogroup.com</a></p>
+            <p>Lic: CGC059479 & CCC133126</p>
           </div>
         </section>
       </main>

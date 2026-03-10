@@ -37,7 +37,7 @@ export default function RoosoLanding() {
       setFormData({ name: '', email: '', phone: '', service: 'Roofing', message: '' });
       setTimeout(() => { setIsOpen(false); setSubmitSuccess(false); }, 2500);
     } catch {
-      setSubmitError('Could not send your request. Please call us at 844-781-9216.');
+      setSubmitError('Could not send your request. Please call us at 813-369-9900.');
     } finally {
       setIsSubmitting(false);
     }
@@ -57,22 +57,22 @@ export default function RoosoLanding() {
       images: [
         {
           src: '/img/roof1.jpg',
-          title: 'Metal',
+          title: 'Roof',
           subtitle: 'with clients throughout any roof replacement.'
         },
         {
           src: '/img/roof2.jpg',
-          title: 'Metal',
+          title: 'Roof',
           subtitle: 'with clients throughout any roof replacement.'
         },
         {
           src: '/img/roof3.jpg',
-          title: 'Metal',
+          title: 'Roof',
           subtitle: 'with clients throughout any roof replacement.'
         },
         {
           src: '/img/roof4.jpg',
-          title: 'Metal',
+          title: 'Roof',
           subtitle: 'with clients throughout any roof replacement.'
         }
       ]
@@ -377,10 +377,12 @@ export default function RoosoLanding() {
               </span>.
             </p>
 
+         
           </div>
 
+
           {/* Action Buttons */}
-          <div  className="flex flex-col sm:flex-row gap-4 justify-center mb-8 sm:mb-12 md:mb-16">
+          <div  className="flex flex-col sm:flex-row gap-4 justify-center mb-8 ">
             {/* FREE ESTIMATE button */}
             <button
               onClick={() => setIsOpen(true)}
@@ -426,8 +428,15 @@ export default function RoosoLanding() {
               {/* borde animado brillante */}
               <span className="absolute inset-0  border border-green-400/30 group-hover:border-green-400/80 transition-all duration-500"></span>
             </a>
+            
           </div>
-
+          <div className="flex items-center justify-center gap-2 text-gray-300 text-sm mt-2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-green-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span className="font-medium tracking-wide">Tampa Bay Area, FL</span>
+          </div>
 
         
         </AnimateOnScroll>
@@ -540,9 +549,7 @@ export default function RoosoLanding() {
           <AnimateOnScroll preset="fadeIn" duration={0.6}>
             <div className="relative z-10 text-center text-white">
               <div className="flex items-center justify-center gap-2 text-sm mb-4">
-                <span>Home</span>
-                <span>•</span>
-                <span className="font-semibold">Projects</span>
+              
               </div>
               <h2 className="text-4xl md:text-5xl font-bold">Projects</h2>
             </div>
@@ -564,11 +571,11 @@ export default function RoosoLanding() {
                   height={400}
                   className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#05240a]/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-[#05240a]/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-4 left-4 text-white">
                     <p className="font-semibold">Project {num}</p>
                   </div>
-                </div>
+                </div> */}
               </div>
             ))}
             
@@ -646,7 +653,7 @@ export default function RoosoLanding() {
                   className="w-full h-96 object-cover rounded-lg"
                 />
                 <div className="absolute bottom-0 left-0 right-0 progressive-blur text-white p-4 rounded-b-lg">
-                  <h3 className="font-bold text-[#124409] text-xl">{services[activeService].images[0].title}</h3>
+                  <h3 className="font-bold text-white text-xl">{services[activeService].images[0].title}</h3>
                   <p className="text-sm">{services[activeService].images[0].subtitle}</p>
                 </div>
               </div>
@@ -895,7 +902,7 @@ To be the leading provider of roofing and general contracting services, known fo
                 />
                 <div className="text-white">
                   <h3 className="text-xl font-bold mb-2">ROOSO INC.</h3>
-                  <p className="text-sm text-gray-300 mb-1">📞 844-781-9216</p>
+                  <p className="text-sm text-gray-300 mb-1">📞 813-369-9900</p>
                   <p className="text-sm text-gray-300 mb-1">📧 info@coastalridgeroofingfl.com</p>
                   <p className="text-sm text-gray-300">Lic #26514782</p>
                   

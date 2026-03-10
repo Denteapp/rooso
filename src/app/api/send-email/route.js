@@ -33,7 +33,7 @@ export async function POST(request) {
             </table>
           </div>
           <div style="padding: 16px 32px; background: #124409; text-align: center;">
-            <p style="color: #b0f0b8; margin: 0; font-size: 12px;">ROOSO INC. • 844-781-9216 • info@roosogroup.com</p>
+            <p style="color: #b0f0b8; margin: 0; font-size: 12px;">ROOSO INC. • 813-369-9900 • info@roosogroup.com</p>
           </div>
         </div>
       `,
@@ -55,10 +55,10 @@ export async function POST(request) {
             <h2 style="color: #124409; margin-top: 0;">Thank you, ${name}!</h2>
             <p style="color: #333; line-height: 1.6;">We have received your free estimate request for <strong>${service}</strong> and our team will contact you shortly.</p>
             <p style="color: #333; line-height: 1.6;">If you have any urgent questions, feel free to call us directly:</p>
-            <p style="font-size: 20px; font-weight: bold; color: #1e8b2f; text-align: center; margin: 24px 0;">844-781-9216</p>
+            <p style="font-size: 20px; font-weight: bold; color: #1e8b2f; text-align: center; margin: 24px 0;">813-369-9900</p>
           </div>
           <div style="padding: 16px 32px; background: #124409; text-align: center;">
-            <p style="color: #b0f0b8; margin: 0; font-size: 12px;">ROOSO INC. - 844-781-9216 - info@roosogroup.com</p>
+            <p style="color: #b0f0b8; margin: 0; font-size: 12px;">ROOSO INC. - 813-369-9900 - info@roosogroup.com</p>
           </div>
         </div>
       `,
