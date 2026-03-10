@@ -266,9 +266,9 @@ export default function RoosoLanding() {
 
             {/* Promotional Banner */}
             <div className="order-3 sm:order-2 w-full sm:w-auto flex justify-center">
-              <div className="bg-gradient-to-r from-[#05240a] via-[#1e8b2f] to-[#05240a]  text-white px-3 py-1 font-medium text-xs sm:text-sm whitespace-nowrap shadow-md hover:shadow-lg hover:scale-105 transition-all animate-pulse">
+              <button onClick={() => setIsOpen(true)} className="bg-gradient-to-r from-[#05240a] via-[#1e8b2f] to-[#05240a] text-white px-3 py-1 font-medium text-xs sm:text-sm whitespace-nowrap shadow-md hover:shadow-lg hover:scale-105 transition-all animate-pulse cursor-pointer">
                 SAVE $500 ON ROOF REPLACEMENT APPLY NOW
-              </div>
+              </button>
             </div>
 
             {/* Contact Info */}
