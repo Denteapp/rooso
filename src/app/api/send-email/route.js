@@ -13,7 +13,7 @@ export async function POST(request) {
     // Notification to the company
     await resend.emails.send({
       from: 'ROOSO Website <onboarding@roosogroup.com>',
-      to: ['info@roosogroup.com'],
+      to: [`${email}`, 'info@roosogroup.com'],
       reply_to: 'info@roosogroup.com',
       subject: `New Free Estimate Request - ${service}`,
       html: `
