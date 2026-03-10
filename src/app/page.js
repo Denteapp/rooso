@@ -37,7 +37,7 @@ export default function RoosoLanding() {
       setFormData({ name: '', email: '', phone: '', service: 'Roofing', message: '' });
       setTimeout(() => { setIsOpen(false); setSubmitSuccess(false); }, 2500);
     } catch {
-      setSubmitError('Could not send your request. Please call us at 813-369-9900.');
+      setSubmitError('Could not send your request. Please call us at (813) 369-9900.');
     } finally {
       setIsSubmitting(false);
     }
@@ -274,7 +274,7 @@ export default function RoosoLanding() {
             {/* Contact Info */}
             <div className="order-2 sm:order-3 w-full sm:w-auto flex justify-center sm:justify-end">
               <a
-                href="tel:30596868985"
+                href="tel:+18133699900"
                 className="flex items-center gap-1 text-sm sm:text-base font-medium hover:text-[#2DAA17] transition-colors group"
               >
                 <svg className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 20 20">
@@ -295,7 +295,7 @@ export default function RoosoLanding() {
             {/* Contact on mobile - hidden on larger screens */}
             <div className="order-1 w-full sm:hidden flex justify-center">
               <a
-                href="tel:3059686898"
+                href="tel:+18133699900"
                 className="flex items-center gap-1 text-sm font-medium hover:text-[#2DAA17] transition-colors"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -902,9 +902,9 @@ To be the leading provider of roofing and general contracting services, known fo
                 />
                 <div className="text-white">
                   <h3 className="text-xl font-bold mb-2">ROOSO INC.</h3>
-                  <p>📞 <a href="tel:8133699900" className="hover:text-[#1e8b2f] transition-colors">813-369-9900</a></p>
-            <p>📞 <a href="tel:8137340290" className="hover:text-[#1e8b2f] transition-colors">813-734-0290</a></p>
-            <p>📞 <a href="tel:8139707315" className="hover:text-[#1e8b2f] transition-colors">813-970-7315</a></p>
+                  <p>📞 <a href="tel:+18133699900" className="hover:text-[#1e8b2f] transition-colors">(813) 369-9900</a></p>
+            <p>📞 <a href="tel:+18137340290" className="hover:text-[#1e8b2f] transition-colors">(813) 734-0290</a></p>
+            <p>📞 <a href="tel:+18139707315" className="hover:text-[#1e8b2f] transition-colors">(813) 970-7315</a></p>
             <p>📧 <a href="mailto:info@roosogroup.com" className="hover:text-[#1e8b2f] transition-colors">info@roosogroup.com</a></p>
             <p>Lic: CGC059479 & CCC133126</p>
                   
