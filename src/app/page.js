@@ -4,7 +4,9 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { FaHome, FaDollarSign, FaShieldAlt, FaUsers, FaFileContract, FaHandshake, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-// import { useState } from 'react'
+import AnimateOnScroll from '@/components/AnimateOnScroll';
+import ImageWithLoading from '@/components/ImageWithLoading';
+
 export default function RoosoLanding() {
   const [activeService, setActiveService] = useState('roofing');
  
@@ -16,20 +18,36 @@ export default function RoosoLanding() {
     message: ''
   });
 
-  const handleSubmit = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí puedes conectar con EmailJS, Formspree, o tu API
-    console.log('Form submitted:', formData);
-    alert('Thank you! We will contact you soon.');
-    setIsOpen(false);
-    setFormData({ name: '', email: '', phone: '', service: 'Roofing', message: '' });
+    setIsSubmitting(true);
+    setSubmitError('');
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) throw new Error('Failed to send');
+      setSubmitSuccess(true);
+      setFormData({ name: '', email: '', phone: '', service: 'Roofing', message: '' });
+      setTimeout(() => { setIsOpen(false); setSubmitSuccess(false); }, 2500);
+    } catch {
+      setSubmitError('Could not send your request. Please call us at 844-781-9216.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleChange = () => {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-    let [isOpen, setIsOpen] = useState(false)
+  let [isOpen, setIsOpen] = useState(false);
 
 
   const services = {
@@ -187,13 +205,22 @@ export default function RoosoLanding() {
           className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-green-600 focus:border-transparent transition resize-none placeholder:text-gray-400"
         />
 
+        {/* Feedback messages */}
+        {submitError && (
+          <p className="text-red-600 text-xs">{submitError}</p>
+        )}
+        {submitSuccess && (
+          <p className="text-green-600 text-xs font-medium">✓ Request sent! We will contact you shortly.</p>
+        )}
+
         {/* Botones */}
         <div className="flex gap-2 pt-2">
           <button
             type="submit"
-            className="flex-1 bg-gradient-to-r from-[#05240a] via-[#1e8b2f] to-[#05240a] text-white font-semibold text-sm py-2.5 rounded-md hover:shadow-lg transform hover:scale-[1.02] transition-all duration-200"
+            disabled={isSubmitting || submitSuccess}
+            className="flex-1 bg-gradient-to-r from-[#05240a] via-[#1e8b2f] to-[#05240a] text-white font-semibold text-sm py-2.5 rounded-md hover:shadow-lg transform hover:scale-[1.02] transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
           >
-            Send Request
+            {isSubmitting ? 'Sending...' : submitSuccess ? 'Sent ✓' : 'Send Request'}
           </button>
           <button
             type="button"
@@ -279,20 +306,6 @@ export default function RoosoLanding() {
             </div>
 
             {/* Company Tagline */}
-            <div className="order-2 w-full sm:w-auto flex justify-center z-50">
-              <div className="font-bold text-sm sm:text-base tracking-wider flex items-center gap-2">
-                {/* <span className="text-[#2DAA17] text-lg sm:text-xl">★</span> */}
-                <div className="order-3 w-full sm:w-auto flex justify-center sm:justify-end">
-                  <button className="bg-gradient-to-r from-[#05240a] via-[#1e8b2f] to-[#05240a]  shadow-[0_0_25px_rgba(37,235,80,0.3)] hover:shadow-[0_0_35px_rgba(37,235,80,0.4)]  text-white px-6 sm:px-8  sm:py-1 font-semibold text-sm my-2 transition-all  uppercase tracking-wide relative">
-                    Finance Your Project
-                    <span className="absolute inset-0  border border-green-400/30 group-hover:border-green-400/80 transition-all duration-500"></span>
-
-                  </button>
-                </div>
-                {/* <span className="text-[#2DAA17] text-lg sm:text-xl">★</span> */}
-              </div>
-
-            </div>
             <div className="order-2 w-full sm:w-auto flex justify-center">
               <div className="font-bold text-sm sm:text-base tracking-wider flex items-center gap-2">
                 {/* <span className="text-[#2DAA17] text-lg sm:text-xl">★</span> */}
@@ -332,7 +345,7 @@ export default function RoosoLanding() {
         />
 
         {/* Content */}
-        <div className="relative z-10 max-w-6xl w-full text-white">
+        <AnimateOnScroll preset="fadeIn" duration={0.8} className="relative z-10 max-w-6xl w-full text-white">
 
           {/* Logo and Description */}
           <div className="flex flex-col items-center justify-center md:items-start mb-6 sm:mb-10 md:mb-16">
@@ -369,8 +382,16 @@ export default function RoosoLanding() {
           {/* Action Buttons */}
           <div  className="flex flex-col sm:flex-row gap-4 justify-center mb-8 sm:mb-12 md:mb-16">
             {/* FREE ESTIMATE button */}
-            <button onClick={() => setIsOpen(true)} className="w-full sm:w-auto bg-black hover:bg-gray-900 text-white px-8 py-2  shadow-lg shadow-green-500/30 hover:shadow-green-500/50 transition-all font-semibold text-sm sm:text-base">
-              FREE ESTIMATE
+            <button
+              onClick={() => setIsOpen(true)}
+              className="group relative w-full sm:w-auto inline-flex items-center justify-center px-10 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#05240a] via-[#1e8b2f] to-[#05240a] shadow-[0_0_25px_rgba(37,235,80,0.3)] hover:shadow-[0_0_35px_rgba(37,235,80,0.4)] transition-all duration-500 overflow-hidden"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></span>
+              <span className="relative z-10">FREE ESTIMATE</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-3 text-green-200 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+              <span className="absolute inset-0 border border-green-400/30 group-hover:border-green-400/80 transition-all duration-500"></span>
             </button>
 
             {/* HEARTH CTA button */}
@@ -409,13 +430,18 @@ export default function RoosoLanding() {
 
 
         
-        </div>
+        </AnimateOnScroll>
       </section>
 
       {/* Features/Services Icon Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <AnimateOnScroll 
+            preset="slideUp" 
+            duration={0.5}
+            staggerChildren={{ delay: 0.1 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
             {/* Feature 1 - Commercial Roofing */}
             <div className="flex flex-col items-center text-center group hover:transform hover:scale-105 transition-all duration-300">
               <div className="w-20 h-20 bg-gradient-to-br from-[#05240a] to-[#2DAA17] rounded-lg flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:shadow-green-500/50 transition-all">
@@ -463,37 +489,37 @@ export default function RoosoLanding() {
                 ensuring professional results and customer satisfaction.
               </p>
             </div>
-          </div>
+          </AnimateOnScroll>
         </div>
       </section>
 
       {/* Licensing & Veterans Banner */}
-      <section className="py-8 bg-gradient-to-r from-[#2DAA17] via-[#05240a] to-[#2DAA17]">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            {/* Left Side - License Info */}
-            <div className="flex items-center justify-center gap-6 text-white">
-              <div className="flex items-center gap-3">
-                <FaFileContract className="text-5xl" />
+      <AnimateOnScroll preset="fadeIn" duration={0.5}>
+        <section className="py-8 bg-gradient-to-r from-[#2DAA17] via-[#05240a] to-[#2DAA17]">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+              {/* Left Side - License Info */}
+              <div className="flex items-center justify-center gap-6 text-white">
+                <div className="flex items-center gap-3">
+                  <FaFileContract className="text-5xl" />
+                  <div>
+                    <p className="text-sm font-light">Lic: CGC059479 & CCC133126</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Side - Veterans Discount */}
+              <div className="flex items-center justify-center gap-4 text-white">
+                <FaHandshake className="text-5xl" />
                 <div>
-                  <p className="text-sm font-light">Lic: CGC059479 & CCC133126</p>
-                  <p className="text-xs opacity-80 mt-1">Poner esto en Lic: CGC1537832 - CCC1336190</p>
-                  <p className="text-xs opacity-70 mt-1">Referencia https://www.5star-gc.com/</p>
+                  <p className="text-xl font-bold">Veterans Discounts Available</p>
+                  <p className="text-sm opacity-80">Thank you for your service</p>
                 </div>
               </div>
             </div>
-
-            {/* Right Side - Veterans Discount */}
-            <div className="flex items-center justify-center gap-4 text-white">
-              <FaHandshake className="text-5xl" />
-              <div>
-                <p className="text-xl font-bold">Veterans Discounts Available</p>
-                <p className="text-sm opacity-80">Thank you for your service</p>
-              </div>
-            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </AnimateOnScroll>
 
       {/* Projects Gallery Section */}
       <section className="bg-gray-100">
@@ -511,14 +537,16 @@ export default function RoosoLanding() {
           </div>
           
           {/* Content */}
-          <div className="relative z-10 text-center text-white">
-            <div className="flex items-center justify-center gap-2 text-sm mb-4">
-              <span>Home</span>
-              <span>•</span>
-              <span className="font-semibold">Projects</span>
+          <AnimateOnScroll preset="fadeIn" duration={0.6}>
+            <div className="relative z-10 text-center text-white">
+              <div className="flex items-center justify-center gap-2 text-sm mb-4">
+                <span>Home</span>
+                <span>•</span>
+                <span className="font-semibold">Projects</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold">Projects</h2>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold">Projects</h2>
-          </div>
+          </AnimateOnScroll>
         </div>
 
         {/* Projects Grid Container */}
@@ -575,83 +603,98 @@ export default function RoosoLanding() {
       {/* Services Section */}
       <section className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-green-900 mb-4">OURS SERVICES</h2>
+          <AnimateOnScroll preset="slideUp" duration={0.5}>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-green-900 mb-4">OURS SERVICES</h2>
 
-            {/* Service Tabs */}
-            <div className="flex justify-center flex-col md:flex-row gap-6 mb-8">
-              <button
-                onClick={() => setActiveService('roofing')}
-                className={`text-4xl md:text-5xl font-bold  ${activeService === 'roofing' ? 'text-[#124409] underline decoration-2 decoration-green-600' : 'text-gray-300'
-                  }`}
-              >
-                ROOFING
-              </button>
-              <button
-                onClick={() => setActiveService('general')}
-                className={`text-4xl md:text-5xl font-bold ${activeService === 'general' ? 'text-[#124409] underline decoration-2 decoration-green-600' : 'text-gray-300'
-                  }`}
-              >
-                GENERAL CONTRACTOR
-              </button>
-              <button
-                onClick={() => setActiveService('solar')}
-                className={`text-4xl md:text-5xl font-bold ${activeService === 'solar' ? 'text-[#124409] underline decoration-2  decoration-green-600' : 'text-gray-300'
-                  }`}
-              >
-                SOLAR
-              </button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Single Image */}
-            <div className="relative group">
-              <Image
-                src={services[activeService].images[0].src}
-                alt={services[activeService].images[0].title}
-                width={600}
-                height={400}
-                className="w-full h-96 object-cover rounded-lg"
-              />
-              <div className="absolute bottom-0 left-0 right-0 progressive-blur text-white p-4 rounded-b-lg">
-                <h3 className="font-bold text-[#124409] text-xl">{services[activeService].images[0].title}</h3>
-                <p className="text-sm">{services[activeService].images[0].subtitle}</p>
+              {/* Service Tabs */}
+              <div className="flex justify-center flex-col md:flex-row gap-6 mb-8">
+                <button
+                  onClick={() => setActiveService('roofing')}
+                  className={`text-4xl md:text-5xl font-bold  ${activeService === 'roofing' ? 'text-[#124409] underline decoration-2 decoration-green-600' : 'text-gray-300'
+                    }`}
+                >
+                  ROOFING
+                </button>
+                <button
+                  onClick={() => setActiveService('general')}
+                  className={`text-4xl md:text-5xl font-bold ${activeService === 'general' ? 'text-[#124409] underline decoration-2 decoration-green-600' : 'text-gray-300'
+                    }`}
+                >
+                  GENERAL CONTRACTOR
+                </button>
+                <button
+                  onClick={() => setActiveService('solar')}
+                  className={`text-4xl md:text-5xl font-bold ${activeService === 'solar' ? 'text-[#124409] underline decoration-2  decoration-green-600' : 'text-gray-300'
+                    }`}
+                >
+                  SOLAR
+                </button>
               </div>
             </div>
+          </AnimateOnScroll>
 
-            {/* Service Info */}
-            <div>
-              <h2 className="text-4xl font-bold text-[#124409] mb-6">
-                {services[activeService].title}
-              </h2>
-              <p className="text-gray-700 text-lg mb-8 leading-relaxed">
-                {services[activeService].description}
-              </p>
-              <button className="bg-black text-white px-8 py-3 font-bold">
-                GET A ESTIMATE NOW
-              </button>
+          <AnimateOnScroll preset="fadeIn" duration={0.6} delay={0.2}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Single Image */}
+              <div className="relative group">
+                <Image
+                  src={services[activeService].images[0].src}
+                  alt={services[activeService].images[0].title}
+                  width={600}
+                  height={400}
+                  className="w-full h-96 object-cover rounded-lg"
+                />
+                <div className="absolute bottom-0 left-0 right-0 progressive-blur text-white p-4 rounded-b-lg">
+                  <h3 className="font-bold text-[#124409] text-xl">{services[activeService].images[0].title}</h3>
+                  <p className="text-sm">{services[activeService].images[0].subtitle}</p>
+                </div>
+              </div>
+
+              {/* Service Info */}
+              <div>
+                <h2 className="text-4xl font-bold text-[#124409] mb-6">
+                  {services[activeService].title}
+                </h2>
+                <p className="text-gray-700 text-lg mb-8 leading-relaxed">
+                  {services[activeService].description}
+                </p>
+                <button
+                  onClick={() => setIsOpen(true)}
+                  className="group relative inline-flex items-center justify-center px-10 py-3 text-lg font-semibold text-white bg-gradient-to-r from-[#05240a] via-[#1e8b2f] to-[#05240a] shadow-[0_0_25px_rgba(37,235,80,0.3)] hover:shadow-[0_0_35px_rgba(37,235,80,0.4)] transition-all duration-500 overflow-hidden"
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></span>
+                  <span className="relative z-10">GET A FREE ESTIMATE</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-3 text-green-200 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                  <span className="absolute inset-0 border border-green-400/30 group-hover:border-green-400/80 transition-all duration-500"></span>
+                </button>
+              </div>
             </div>
-          </div>
+          </AnimateOnScroll>
         </div>
       </section>
 
       {/* Roof Replacement & Construction Section */}
-      <section className="py-16 text-white text-center bg-overlay-green">
-        <div className="relative z-10 max-w-4xl mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-6">
-            ROOF REPLACEMENT & CONSTRUCTION
-          </h2>
-          <p className="text-lg mb-8 max-w-2xl mx-auto">
-            Whether you re looking for a new remodel, a custom built home or a new roof installation, count on Backbone Construction & Roofing for help.
-          </p>
-        </div>
-      </section>
+      <AnimateOnScroll preset="fadeIn" duration={0.5}>
+        <section className="py-16 text-white text-center bg-overlay-green">
+          <div className="relative z-10 max-w-4xl mx-auto px-4">
+            <h2 className="text-4xl font-bold mb-6">
+              ROOF REPLACEMENT & CONSTRUCTION
+            </h2>
+            <p className="text-lg mb-8 max-w-2xl mx-auto">
+              Whether you re looking for a new remodel, a custom built home or a new roof installation, count on Backbone Construction & Roofing for help.
+            </p>
+          </div>
+        </section>
+      </AnimateOnScroll>
 
 
       {/* #1 Construction Company Section */}
       <section className="py-16 bg-white text-center overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
+          <AnimateOnScroll preset="slideUp" duration={0.5}>
           <h2 className="text-4xl font-bold text-[#124409] mb-8">
             #1 CONSTRUCTION & ROOFING COMPANY
           </h2>
@@ -677,9 +720,18 @@ To be the leading provider of roofing and general contracting services, known fo
             </div>
           </div>
 
-          <button className="bg-black text-white px-8 py-3 font-bold mb-12 shadow-md hover:shadow-lg transition">
-            GET A ESTIMATE NOW
+          <button
+            onClick={() => setIsOpen(true)}
+            className="group relative inline-flex items-center justify-center px-10 py-3 mt-8 mb-12 text-lg font-semibold text-white bg-gradient-to-r from-[#05240a] via-[#1e8b2f] to-[#05240a] shadow-[0_0_25px_rgba(37,235,80,0.3)] hover:shadow-[0_0_35px_rgba(37,235,80,0.4)] transition-all duration-500 overflow-hidden"
+          >
+            <span className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></span>
+            <span className="relative z-10">GET A FREE ESTIMATE</span>
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-3 text-green-200 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+            <span className="absolute inset-0 border border-green-400/30 group-hover:border-green-400/80 transition-all duration-500"></span>
           </button>
+          </AnimateOnScroll>
         </div>
 
         {/* Carrusel infinito */}
@@ -729,9 +781,11 @@ To be the leading provider of roofing and general contracting services, known fo
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           {/* Section Header */}
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-12">
-            Reviews
-          </h2>
+          <AnimateOnScroll preset="slideUp" duration={0.5}>
+            <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-12">
+              Reviews
+            </h2>
+          </AnimateOnScroll>
 
           {/* Reviews Container with Navigation */}
           <div className="relative">
@@ -741,7 +795,12 @@ To be the leading provider of roofing and general contracting services, known fo
             </button>
 
             {/* Reviews Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <AnimateOnScroll 
+              preset="slideUp" 
+              duration={0.4}
+              staggerChildren={{ delay: 0.15 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            >
               {/* Review 1 - Pam Greco */}
               <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6">
                 <div className="flex items-center mb-4">
@@ -810,7 +869,7 @@ To be the leading provider of roofing and general contracting services, known fo
                   Read more
                 </a>
               </div>
-            </div>
+            </AnimateOnScroll>
 
             {/* Right Arrow */}
             <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-all z-10">
@@ -821,40 +880,47 @@ To be the leading provider of roofing and general contracting services, known fo
       </section>
 
       {/* Contact Reference Section - Footer */}
-      <section className="py-12 bg-[#2d2d2b]">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            {/* Left Side - Company Info */}
-            <div className="flex items-center gap-6">
-              <Image
-                src="/logo2.png"
-                alt="Rooso Construction"
-                width={120}
-                height={80}
-                className="w-32 h-auto"
-              />
-              <div className="text-white">
-                <h3 className="text-xl font-bold mb-2">ROOSO INC.</h3>
-                <p className="text-sm text-gray-300 mb-1">📞 844-781-9216</p>
-                <p className="text-sm text-gray-300 mb-1">📧 info@coastalridgeroofingfl.com</p>
-                <p className="text-sm text-gray-300">Lic #26514782</p>
-                
-              </div>
+      <AnimateOnScroll preset="fadeIn" duration={0.5}>
+        <section className="py-12 bg-[#2d2d2b]">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              {/* Left Side - Company Info */}
+              <div className="flex items-center gap-6">
+                <Image
+                  src="/logo2.png"
+                  alt="Rooso Construction"
+                  width={120}
+                  height={80}
+                  className="w-32 h-auto"
+                />
+                <div className="text-white">
+                  <h3 className="text-xl font-bold mb-2">ROOSO INC.</h3>
+                  <p className="text-sm text-gray-300 mb-1">📞 844-781-9216</p>
+                  <p className="text-sm text-gray-300 mb-1">📧 info@coastalridgeroofingfl.com</p>
+                  <p className="text-sm text-gray-300">Lic #26514782</p>
+                  
+                </div>
             </div>
 
             {/* Right Side - CTA */}
             <div className="text-center md:text-right">
-              <button 
+              <button
                 onClick={() => setIsOpen(true)}
-                className="bg-gradient-to-r from-[#2DAA17] to-[#32c849] text-white px-10 py-4 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-green-500/50 transition-all duration-300 inline-block"
+                className="group relative inline-flex items-center justify-center px-10 py-4 text-lg font-semibold text-white bg-gradient-to-r from-[#05240a] via-[#1e8b2f] to-[#05240a] shadow-[0_0_25px_rgba(37,235,80,0.3)] hover:shadow-[0_0_35px_rgba(37,235,80,0.4)] transition-all duration-500 overflow-hidden"
               >
-                Get a Quote
+                <span className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></span>
+                <span className="relative z-10">Get a Quote</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-3 text-green-200 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+                <span className="absolute inset-0 border border-green-400/30 group-hover:border-green-400/80 transition-all duration-500"></span>
               </button>
-              <p className="text-gray-400 text-sm mt-3">Privacy Policy</p>
+              <a href="/privacy-policy" className="block text-gray-400 text-sm mt-3 hover:text-white transition-colors">Privacy Policy</a>
             </div>
           </div>
         </div>
       </section>
+      </AnimateOnScroll>
     </div>
   );
 }

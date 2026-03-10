@@ -3,6 +3,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Variables para animaciones */
+  --animation-duration-fast: 0.3s;
+  --animation-duration-normal: 0.5s;
+  --animation-duration-slow: 0.8s;
+  --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-easing-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 @theme inline {
@@ -19,10 +26,29 @@
   }
 }
 
+/* Scroll suave global */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Respetar preferencias de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  /* Transición suave para cambios de fondo */
+  transition: background-color var(--animation-duration-normal) var(--animation-easing);
 }
 
 
@@ -69,4 +95,35 @@ body {
 
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+/* Animación shimmer para skeletons de carga */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Transiciones suaves para elementos interactivos */
+button,
+a,
+[role="button"] {
+  transition: all var(--animation-duration-fast) var(--animation-easing);
+}
+
+/* Smooth hover effects */
+.hover-lift {
+  transition: transform var(--animation-duration-fast) var(--animation-easing);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Optimización de rendimiento para animaciones */
+.will-animate {
+  will-change: transform, opacity;
 }
